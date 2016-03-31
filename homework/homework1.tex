@@ -1,0 +1,132 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\renewcommand{\d}{\mathrm{d}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+	\setheader{Math 281-3}{Homework 1}{Due Thursday, April 7}{}{}{}
+	\begin{enumerate}
+		\item \begin{enumerate}
+				\item Find all values of $x,y$ that satisfy the following relationships:
+					\begin{align*}
+						x+y&=7\\
+						2x-3y&=13.
+					\end{align*}
+					What can you say about $\Span\left\{\mat{1\\2},\mat{1\\-3}\right\}$ and the 
+					vector $\mat{7\\13}$?
+				\item Find values of $x,y,z$ that satisfy the following relationships (your answer
+					may involve ugly fractions):
+					\begin{align*}
+						x+2y+8z&=1\\
+						4x+5y+8z&=2.
+					\end{align*}
+					What can you say about $\Span\left\{\mat{1\\4},\mat{2\\5},\mat{8\\8}\right\}$ and the 
+					vector $\mat{1\\2}$?
+				\item Let $\vec w=\mat{5\\-12}$, $\vec u=\mat{1\\1}$, and $\vec v=\mat{-1\\0}$.  
+				Express $\vec w$ as a linear combination of $\vec u$ and $\vec v$.
+
+			\end{enumerate}
+		\item \begin{enumerate}
+			\item Let 
+				\[
+					S=\Span\left\{\mat{1\\1\\1},\mat{1\\1\\0},\mat{0\\0\\1}\right\}.
+				\]
+				Is $S$ a point, line, plane, or all of $\R^3$?  Explain.
+			\item Let $\vec u = \mat{3\\4\\1}$, $\vec v=\mat{4\\-4\\-4}$, and $\vec w=\mat{14\\0\\d}$.
+				\begin{enumerate}
+					\item For what value(s) of $d$ is $\Span\{\vec u,\vec v,\vec w\}$ a plane?
+					\item Is there a value of $d$ so $\Span\{\vec u,\vec v,\vec w\}$ a line?  Explain.
+				\end{enumerate}
+
+			\end{enumerate}
+		
+		\item Let $\vec x=\mat{1\\1}$ and $\vec y=\mat{1\\-1}$.  Prove that $\{\vec x,\vec y\}$ is a 
+			basis for $\R^2$.
+
+		\item Let 
+			\begin{align*}
+				U&=\Span\left\{\mat{1\\2\\3},\mat{3\\2\\1},\mat{4\\4\\4}\right\},\\
+				V&=\left\{\vec x\in\R^3:\vec x\cdot\mat{1\\1\\1}=0\right\},\\
+				W&=U\cup V.
+			\end{align*}
+			For each subset $U$, $V$, $W$ of $\R^3$, show whether it is a subspace or not.  If it is a subspace,
+			classify it as a point, line, plane, or all of $\R^3$.  Further, if it is a subspace, give a basis
+			for it.
+		\item Notice that no definitions we've used so far have referred to coordinates, just vectors
+			and scalars (we haven't even demanded our scalars be $\R$).  This is on purpose
+			because any collection of objects that can be added and scalar multiplied can be 
+			treated as a ``vector.''
+			
+			Let $\vec u=1$, $\vec v = x$, and $\vec w = x^2$ be polynomials and let $Q=\Span\{\vec u,\vec v,\vec w\}$.
+			
+			\begin{enumerate}
+				\item Is $4x+3\in Q$? What about $x^3-3x+2$?
+				\item Describe $\Span\{\vec u,\vec v,\vec w\}$ and $\Span\{\vec v,\vec w\}$.
+				\item Consider the differential equation
+					\[
+						y''-4y=0.
+					\]
+					Express all solutions as a span.
+				\item Is the set $X=\{e^{it}, e^{-it}, \sin t, \cos t\}$ linearly independent if we allow
+					complex scalars?  (You may reference homework from last term to answer this question.)
+					Explain.
+				\item Let $S=\Span\{\sin t,\cos t\}$ (we're back to real scalars now).  Is $\sin(t+\pi/6)\in S$?  Show that $S=\{\alpha\sin(t+\beta):\alpha,\beta\in \R\}$.
+				\item Define the map $P:\R^2\to\R^2$ in the following way.  Given $(\alpha,\beta)\in \R^2$ with 
+					$(\alpha,\beta)\neq \vec 0$, find the 
+					unique $\alpha'\in [0,\infty)$
+					and $\beta'\in[0,2\pi)$ such that $\alpha\sin t+\beta\cos t = \alpha'\sin(t+\beta')$.
+						Define $P(\alpha,\beta)=(\alpha',\beta')$ and $P(0,0)=(0,0)$.
+
+					Find a formula for $P$.  Is $P$ invertible?  If so, find a formula for its inverse?  
+					Do these formulas look familiar?
+			\end{enumerate}
+	\end{enumerate}
+
+\end{document}

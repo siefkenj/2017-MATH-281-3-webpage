@@ -1,0 +1,78 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{tikz}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+\expandafter\def\expandafter\quote\expandafter{\quote\sf\color{DarkGreen}}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} %({\small \it \today})
+	}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+\setheader{Math 211 (A01)}{Homework 2 (Typed)}{Due Tuesday, April 12}{}{}{}
+
+	\begin{enumerate}
+		\item Let $\vec u=\mat{1\\2\\3}$, $\vec v=\mat{4\\5\\6}$, and $\vec w=\mat{7\\8\\9}$. Explain whether
+			the set $A=\{\vec u,\vec v,\vec w\}$ is a basis for $\R^3$.  
+			Make sure to include all relevant definitions.
+
+		\item Fix $\vec u,\vec v\in \R^n$.  Show that $\Span(\Span\{\vec u,\vec v\})=\Span\{\vec u,\vec v\}$.
+			Make sure to include all relevant definitions.
+		
+		\item The worksheets define $\Proj_{\vec v}\vec u$ as the vector in the direction $\vec v$ such that
+			$\vec u-\Proj_{\vec v}\vec u$ is orthogonal to $\vec v$.  Call this definition (a).  Your textbook
+			defined $\Proj_{\vec v}\vec u$ as the vector $\frac{\vec u\cdot \vec v}{\vec v\cdot\vec v}\vec v$.
+			Call this definition (b).  Show that definitions (a) and (b) are equivalent by showing 
+			that that the vector arising from definition (b) must be the same as the vector
+			arising from definition (a).
+			In your answer, elaborate on definition (a) by including
+			the definition of \emph{vector in the direction of $\vec v$} and \emph{orthogonal}. (Hint: in the past,
+			a major stumbling block for writeups has been choosing a notation that clearly distinguishes 
+			vectors from definition (a) and vectors from definition (b).)
+
+
+	\end{enumerate}
+\end{document}

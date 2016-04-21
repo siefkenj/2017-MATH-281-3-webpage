@@ -1,0 +1,258 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=-.4in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\renewcommand{\d}{\mathrm{d}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+	\setheader{Math 281-3}{Homework 4}{Due Thursday, April 28}{}{}{}
+
+
+	For this homework, you will be using \emph{Matlab} (or the free and open-source version of
+	\emph{Matlab} called \emph{Octave}).  Include a clearly-labeled printout
+	of the work you did in Matlab for each problem.
+	
+	Before you start, read through \\
+	\centerline{\url{http://web.gps.caltech.edu/classes/ge11d/doc/matlab_Resource_Seminar.pdf}}\\
+	for a short Matlab introduction.
+	For additional documentation, see the Matlab website \\\centerline{\url{http://www.mathworks.com/help/matlab/index.html}}
+
+	\textbf{Quick Tips:}
+
+	\vspace{-1em}
+	\begin{itemize}
+		\item You can supress Matlab output by adding a `\texttt{;}'
+		to the end of your Matlab command (this is useful for
+		Matlab commands executed in loops).
+
+		\item You can save plots/figures from the figure's dialog
+		by selecting `Save as' and then choosing \texttt{png}
+		or \texttt{jpg} in the file-types dropdown.
+
+		\item You can include Matlab code in \LaTeX\ by copying
+		and pasting it between \texttt{\textbackslash
+		begin\{verbatim\}} \ldots\texttt{\textbackslash
+		end\{verbatim\}}.
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Find the general solution to the system of equations corresponding to each augmented matrix.
+			\begin{enumerate}
+				\item \[\left[\begin{array}{ccccc|c}
+				       1&    11&   -22&     0&     3&1 \\
+				    5244&  1542& -3084&   576& 16308&2\\
+				     108&  1188& -2376&     0&   324&3\\
+				     264&   465&  -930&    25&   817&4\\
+				    2166&  3729& -7458&   206&  6704&5
+					\end{array}\right]\]
+				\item \[\left[\begin{array}{ccccc|c}
+						    7&  3&  2&  3&  7&  1 \\
+						    9&  3&  2&  1& 10&  2\\
+						    7&  5&  2&  2&  8&  3\\
+						    4& 10&  3&  1& 10&  4\\
+						    4&  6&  1&  3&  9&  5
+				    \end{array}\right]
+					\]
+			\end{enumerate}
+		
+		\item Although the \texttt{rref} command will row-reduce for you, Matlab makes it easy
+			to row reduce ``by hand.''  If \texttt{A} is a matrix, the row operation 
+			$R_2\mapsto R_2-6R_1$ can be performed with the command \texttt{A(2,:)=A(2,:)-6*A(1,:)}
+			and other row operations can be performed similarly.
+
+			\begin{enumerate}
+				\item Consider the $3\times 3$ matrix $A=\mat{1&4&0\\1&2&0\\0&0&0}$ and $B=\mat{1&0&0\\0&1&0\\0&0&1}$.
+					You only need to perform two row operations to fully reduce $A$.  Call these two
+					operations $R^{(1)}$ and $R^{(2)}$. Use Matlab to perform those
+					row operations on $A$ and also perform the same row operations on $B$ (effectively, un-row
+					reducing $B$).
+				\item Let $B_1=R^{(1)}(B)$ and $B_2=R^{(2)}(B)$ be the matrices obtained from $B$ by applying
+					the two row operations in isolation (in Matlab, you can name variables
+					\texttt{B1} and \texttt{B2} if you like).  What happens when you perform the matrix product
+					$B_1A$?  How about $B_2A$?  And $B_2B_1A$?  Finally compute the product $BA$, and explain
+					why you get the results you do.
+				\item Let $X=\mat{2&1&3\\2&1&3\\3&2&4}$.  Find a matrix $Y$ so that $YX=\mathrm{rref}(X)$.
+			\end{enumerate}
+		\item A loop in Matlab/Octave is written with the 
+	\begin{verbatim}
+for i=1:n,
+    [loop content]
+end
+	\end{verbatim}
+	syntax.
+
+	For example, if we want the variable $x$ to be an accumulated sum of squares from $1^2$ to $15^2$ 
+	(that is $x=1^2+2^2+\cdots+15^2$), we could write
+	\begin{verbatim}
+x=0;
+for i=1:15,
+    x = x + i^2;
+end
+	\end{verbatim}
+	After executing this code $x$ will be the value $1240$.  The code works as follows: first we assign the value
+	$0$ to $x$.  Then we enter the loop.  In the first iteration, when $i$ is 1, the new value of $x$ will be the current value,
+	0, plus $1^2$.  The next time through the loop, $i$ is 2 and so we assign $x$ to be the current value, $1^2$, plus
+	$2^2$, etc.. Once we have looped through with the value of $i$ being 15, we stop.
+
+	If statements are written with the 
+	\begin{verbatim}
+if [var]==[val],
+    [if content]
+end
+	\end{verbatim}
+	syntax (note the double equals). 
+
+	For example, if we wanted $x$ to be the sum of the squares of only the even numbers between 1 and 15, we might write:
+	\begin{verbatim}
+x=0;
+for i=1:15,
+    if round(i/2) == i/2,
+        x = x + i^2;
+    end
+end
+	\end{verbatim}
+
+	Here, {\tt round(i/2)==i/2} is true when {\tt i/2} has no decimal places and so it is even.  Thus, when that happens
+	(and only when that happens) we add the value $i^2$ to $x$.
+
+
+	{\bf Question}:
+	\begin{enumerate}
+		\item The command \texttt{rand(3,1)} will generate a random $3\times 1$ column vector.  Find out what percentage
+		of random triples of vectors $\{\vec a,\vec b,\vec c\}$ are linearly independent.  Sample at least 1000
+		random triples to gather a statistic.
+
+		Consider your result and come up with an explanation of why you got the percentage you did.
+
+		{\bf Tips}: Build a loop to test this 1000 times, but start out
+		with a much smaller loop;
+		use `\texttt{;}' inside your loop so you don't get a bunch of unhelpful information printed to the screen;
+		and use Matlab's built-in commands to help you like \texttt{rref} to row reduce, \texttt{rank} to find the
+		rank, or \texttt{rand(3,3)} to make a $3\times 3$ matrix of random numbers.
+
+		\item The command \texttt{round(rand(3,1))} will generate a random $3\times 1$ column vector of just zeros
+			and ones.  Find out what percentage
+			of random triples  $\{\vec a,\vec b,\vec c\}$ of zero-one vectors are linearly independent.  Sample at least 1000
+			random triples to gather a statistic.
+
+		Explain your result.  Why is it different or the same as the previous part?  (Hint: it may be useful
+		to think of random zero-one vectors as lying on the vertices of the unit cube.)
+
+	\end{enumerate}
+
+	\item {\sc The power of the right definition}.  Our definition of projection was
+		slightly complicated and hard to compute with, especially compared with the textbook's.
+		However, the benefit of our definition is that it works, almost unchanged, in many more contexts.
+		In this problem we will be projecting onto subspaces.
+
+		{\bf Definition}  If $\vec v$ is a vector and $U$ is a subspace, \emph{the projection of 
+		$\vec v$ onto $U$} is the vector $\vec w\in U$ such that $\vec v-\vec w$ is orthogonal to
+		every vector in $U$.
+
+		For the remainder of this problem, let 
+		\[
+			\vec a'=\mat{1\\1\\2}\qquad \vec b'=\mat{1\\1\\1}\qquad \vec c\,' = \mat{-1\\6\\1}
+		\]
+		and let $\vec a=\vec a'/\|\vec a'\|$, $\vec b=\vec b'/\|\vec b'\|$, and $\vec c=\vec c'/\|\vec c'\|$.
+
+		\begin{enumerate}
+			\item Let's make life a little easier first.  Show that if $\mathcal B$ is a basis
+				for a subspace $U$, then $\vec w$ is orthogonal to every vector in $U$ if
+				and only if $\vec w$ is orthogonal to every vector in $\mathcal B$.
+			\item Let $U=\Span\{\vec a,\vec b\}$.  Analytically find the exact vector
+				$\vec d=\proj_U\vec c$. (Hint, $U=\Span\{\vec a,\vec b\}=\Span\{\vec a',\vec b'\}$,
+				so you can avoid some square roots!)
+			\item Imagine you're an engineer who forgot how to do math but still wanted to
+				find this projection.  ``Ah ha,'' you think, ``I could use Matlab to
+				search for this vector!''
+
+				In Matlab, `\texttt{'}' transposes a matrix.  So, if you want
+				to compute $\vec a\cdot \vec b$, and $\vec a$ and $\vec b$ are column
+				vectors, you could do \texttt{a'*b} in Matlab.
+
+				You decide to try an brute force the problem.  Using the command \texttt{r = randn(1)*a + randn(1)*b}
+				you can generate a random vector in $U$ (\texttt{randn(1)} produces a normally distributed
+				random number, so it is equally likely to be positive or negative, unlike \texttt{rand} which always
+				produces a number in $[0,1]$).  You decide, since computers are fast, you will generate
+				1000 random vectors in $U$ and see which one most closely fits what the projection should fit.
+
+				Since it is unlikely any of your random vectors will be \emph{exactly} the projection,
+				you will need a \emph{score} function.  That is, you will need a function $s:\R^3\to[0,\infty)$
+				such that $s(\vec v)=0$ if $\vec v=\vec d=\Proj_U\vec c$ and $s(\vec v) < s(\vec w)$ if
+				$\vec v$ is ``closer to'' the correct projection than $\vec w$.  Your score function
+				doesn't need to be complicated, but it shouldn't involve $\vec d$.  
+				(If it could involve $\vec d$, a wonderful
+				score function would be $s(\vec v) = \|\vec d-\vec v\|$.)
+
+				With score function in hand, your guess for $\Proj_U\vec c$ is the random vector with the lowest score.
+
+				Write Matlab code to execute this procedure.  If your estimate for $\Proj_U\vec c$ is $\vec p$,
+				call $e=\|\vec p-\vec d\|$ the \emph{error} in your estimate.  Repeat the process of picking
+				the best estimate from 1000 random vectors at least 100 times and report the \textbf{average}
+				error.
+			\item In the procedure outlined above, we could use any basis for $U$ to generate random 
+				vectors.  Find a unit vector $\vec B$ that is orthogonal to $\vec a$
+				such that $U=\Span\{\vec a,\vec B\}$ (Hint, think
+				geometrically and use projections).  Repeat the guessing procedure above using
+				\texttt{r = randn(1)*a + randn(1)*B} to generate your random vectors.  What is the average error
+				using this new basis?  Why is it smaller?  Explain.
+			\item (Optional) We can dramatically improve the our guessing from above by using an \emph{adaptive algorithm}.
+				That is, instead of using \texttt{r = randn(1)*a + randn(1)*b} to generate a new
+				random vector each time, we could use our previous best guess and see if we improve by perturbing
+				it in a random direction.  Thus, our random vectors might look like \\
+				\centerline{\texttt{r = bestGuessSoFar + (randn(1)*a + randn(1)*b)/10}}
+				where we divide by 10 so that we don't guess something too far from our previous good guess 
+				(a more advanced adaptive algorithm would use the score function and adjust the factor of 10
+				based on that).  How much improvement do you see with an adaptive algorithm?
+		\end{enumerate}
+
+	\end{enumerate}
+
+\end{document}

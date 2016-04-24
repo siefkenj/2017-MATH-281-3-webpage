@@ -1,0 +1,169 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=-.4in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} ({\small \it \today})}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\renewcommand{\d}{\mathrm{d}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+	\setheader{Math 281-3}{Homework 5}{Due Thursday, May 5}{}{}{}
+
+	\begin{enumerate}
+		\item For each of the following statements, produce a counterexample to show that the statement is {\bf false}.
+			\begin{enumerate}
+				\item If $A$ and $B$ are square matrices, $AB=BA$.
+				\item If $AB=\mat{1&1\\1&1}$, then $A$ and $B$ are $2\times 2$ matrices.
+				\item If $AB=I$ then $BA=I$.
+				\item If $A^2=0$, then $A=0$.
+			\end{enumerate}
+		\item Let $R=\mat{1&2&3\\4&5&6\\7&8&9}$.
+			\begin{enumerate}
+				\item Find all solutions to the matrix equation $R\mat{x_1\\x_2\\x_3}=\mat{2\\5\\8}$.
+				\item Prove that the set $X=\{\vec x\in\R^3:R\vec x=\vec 0\}$ is a subspace.
+				\item Prove that the set $Y=\{\vec y\in\R^3:\vec y=R\vec x\text{ for some }\vec x\in\R^3\}$ is a subspace.
+			\end{enumerate}
+		\item Suppose $E$ is a $4\times 3$ matrix with columns $\vec c_1,\vec c_2,\vec c_3$ and rows
+			$\vec r_1,\vec r_2,\vec r_3,\vec r_4$.  Let $\vec v=\mat{2\\-1\\1}$.
+			\begin{enumerate}
+				\item Express $E\vec v$ as a linear combination of $\vec c_1,\vec c_2,\vec c_3$.
+				\item Supposing $\vec r_1\cdot \vec v=1$, $\vec r_2\cdot \vec v=6$, $(\vec r_3+\vec r_4)\cdot \vec v=2$,
+					and $(\vec r_3-\vec r_4)\cdot \vec v=-2$, compute $E\vec v$.
+			\end{enumerate}
+
+		\item Suppose that $\vec u$, $\vec v$, and $\vec w$ are vectors in $\R^2$ that are related
+			by the following diagram.
+		\begin{center}
+			\begin{tikzpicture}[scale=.5]
+				\draw[-] (-6, 0) -- node [below,
+				very near end] {} (6, 0);
+				\draw[-] (0, -2) -- node [right,
+				very near start] {} (0, 5);
+				\draw[->] (0, 0) -- node [below,
+				very near end] {$4\vec{u}$}
+				(3, -1);
+				\draw[->] (0, 0) -- node [left,
+				near end] {$2\vec{v}$} (2, 3);
+				\draw[->] (0, 0) -- node [left,
+				very near end] {$3\vec{w}$}
+				(-1, 4);
+				\draw[dotted] (3, -1) -- node
+				[right, very near end] {} (2, 3);
+				\draw[dotted] (-1,4) -- node
+				[below, very near end] {} (2, 3);
+			\end{tikzpicture}
+		\end{center}
+		Let $A=[\vec u|\vec v|\vec w]$ be the matrix with columns $\vec u$, $\vec v$, and $\vec w$.
+		\begin{enumerate}
+			\item What is the rank of $A$?
+			\item Find all solutions to the equation $A\vec x=\vec 0$.
+			\item Find a basis for the subspace $V=\{\vec x\in\R^3: A\vec x=\vec 0\}$.
+		\end{enumerate}
+
+		\item {\sc Linear transformations were here the whole time!} For each transformation, determine
+			whether or not it is a linear transformation.  If it is a linear transformation, give
+			its null space.
+			\begin{enumerate}
+				\item Let $V=\Span\{1,x,x^2\}$ where $1,x,x^2$ are (as usual) polynomials.
+					Let $D:V\to V$ be differentiation.  (Use the limit definition of 
+					the derivative. However, you can
+					do limits like you did in Calc I; you don't have to do $\varepsilon$--$\delta$
+					proofs).
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be left-translation by $s$.  That is, $D^sf(t)=f(t+s)$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be vertical-translation by $s$.  That is, $D^sf(t)=f(t)+s$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be horizontal-stretching by $s$.  That is, $D^sf(t)=f(t/s)$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be vertical-stretching by $s$.  That is, $D^sf(t)=sf(t)$.
+				\item Let $\mathcal I=\{f:\R\to \R\mid f\text{ is increasing}\}$ and let $D:\mathcal I\to \mathcal I$
+					be so that $D(f)=f^{-1}$ takes a function to its inverse.
+				\item Let $\mathcal L=\{f:\R\to \R\mid f(x)=mx+b\text{ for some }m,b\in\R\}$
+					be the set of all functions whose graphs are non-vertical lines and let $D:\mathcal L\to \R$
+					be evaluation at the point $x=1$.  That is, $D(f) = f(1)$.
+			\end{enumerate}
+
+		\item {\sc Once upon a time we were doing vector calculus!}
+			\begin{enumerate}
+				\item Let $f:\R^2\to \R$ be defined by $f(x,y) = \cos(x)+\sin(y)$.  Let $D^f:\R^2\to\R$
+					be such that $D^f(\vec v)$ is the directional derivative of $f$ in at the point $(0,0)$
+					in the direction $\vec v$.  Show, using the definition of directional derivative, that
+					$D^f$ is linear.
+				\item Let $\mathcal F=\{\text{functions from $\R^2$ to $\R$}\}$ and let $\vec v\in \R^2$.
+					Define $D^{\vec v}:\mathcal F\to \R$ to be the function such that $D^{\vec v}(h)$
+					is the directional derivative of $h$ at the point $(0,0)$ in the direction $\vec v$.
+					Show that $D^{\vec v}$ is a linear transformation.
+				\item Let $D_{\vec x}:\mathcal F\times \R^2\to\R$ be so that $D_{\vec x}(h,\vec v)$ is the directional
+					derivative of $h$ at the point $\vec x$ in the direction $\vec v$.
+					Take a moment to appreciate that $D_{\vec x}$ is \emph{bilinear}.  That is, it is
+					linear in both its first and second arguments.  Let $\vec f:\R^2\to\R^2$ be a 
+					vector field.  Notice that $D_{\vec x}(h,\vec f(\vec x))$ is still a linear function of
+					$h$.  The function $d_{\vec x,\vec f}(h)=D_{\vec x}(h, \vec f(\vec x))$ is called
+					a \emph{derivation}.  Much of what we did in multi-variable calculus can be rephrased
+					in terms of derivations.    Bilinearity of $D_{\vec x}$
+					ensures that for a fixed $\vec x$, the set of all derivations is itself a vector space.
+					This vector space is called the \emph{tangent space at $\vec x$}, and it is equivalent
+					to the notion of tangent planes we developed first term.
+
+					Think about the functions defined in the previous paragraph until their definitions
+					make sense.  Then, contemplate whether a differential geometry course (where these
+					ideas are studied in depth) would interest you.  You do not need to write anything for this part.
+				\item In Math 281-1, homework 3, problem 5, we considered the function $f(x,y)=\frac{x^2y}{x^2+y^2}$
+					if $(x,y)\neq(0,0)$ and $f(0,0)=0$.  Let $D^f:\R^2\to \R$ be so that $D^f(\vec v)$
+					is the directional derivative
+					of $f$ at the point $(0,0)$ in the direction $\vec v$.  Is $D^f$ linear?  Make a conjecture
+					about the relationship between linearity of the directional derivative operator
+					and differentiability of a function.
+			\end{enumerate}
+
+	\end{enumerate}
+
+
+\end{document}

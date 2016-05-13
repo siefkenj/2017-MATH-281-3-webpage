@@ -1,0 +1,160 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=-.4in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2}}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Det}{\mathrm{det}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\renewcommand{\d}{\mathrm{d}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+\setheader{Math 281-3}{Homework 7}{Due Thursday, May 19}{}{}{}
+
+	\begin{enumerate}
+		\item Suppose the matrix equation $A\vec x=\mat{3\\2\\7}$ has the general solution
+			\[
+				\vec x=\mat{1\\0\\0}+s\mat{1\\1\\0}+t\mat{-1\\0\\1}.
+			\]
+			\begin{enumerate}
+				\item How many rows and how many columns does $A$ have?
+				\item Find $\Null(A)$.
+				\item Find $\Rank(A)$.
+				\item Find $\text{col}(A)$.
+				\item Find $\text{row}(A)$.
+			\end{enumerate}
+		
+		\item Let
+			\[
+				\vec b_1=\mat{1\\1\\1}\qquad\vec b_2=\mat{1\\-1\\0}\qquad
+				\vec b_3=\mat{-1\\0\\1}\qquad \vec c=\mat{1\\2\\3}
+			\]
+			and let $\mathcal B=\{\vec b_1,\vec b_2,\vec b_3\}$ and $\mathcal S=\{\vec e_1,\vec e_2,\vec e_3\}$.
+			Suppose $T:\R^3\to\R^3$ is a linear transformation and $T(\vec b_1)=2\vec b_1$, 
+			$T(\vec b_2)=3\vec b_2$, and $T(\vec b_3)=-\vec b_3$.
+			\begin{enumerate}
+				\item Compute $[\vec c]_{\mathcal B}$.
+				\item Compute $[T\vec c]_{\mathcal B}$ and $[T\vec c]_{\mathcal S}$.
+				\item Find a matrix for $T$ in the $\mathcal B$ basis (i.e., 
+					the matrix $[T]_{\mathcal B}$) and a matrix for $T$ in
+					the $\mathcal S$ basis (i.e., $[T]_{\mathcal S}$).
+			\end{enumerate}
+		
+		\item Let $A=\mat{1&2&1\\1&1&1\\1&0&0}$ and $B=\mat{1&2&1\\1&1&1\\1&0&x}$.
+		\begin{enumerate}
+			\item Compute $\Det(A)$.
+			\item Compute $\Det(B)$.  For what values of $x$ is $B$ not invertible?
+		\end{enumerate}
+
+		\item Let $A=\mat{1&2\\5&9}$.
+		\begin{enumerate}
+			\item Find an equation for the function $p(x)=\Det(A-xI)$ (this is called the
+				\emph{characteristic polynomial} of $A$).
+			\item For what values of $x$ is $A-xI$ non-invertible?
+			\item Compute $p(A)$, the polynomial $p$ with the matrix $A$ plugged into it.  When you plug a matrix
+				into a polynomial, replace any constant terms $k$ with the matrix $kI$.
+				Can you guess
+				why $p$ is called an \emph{annihilating} polynomial for $A$?
+		\end{enumerate}
+
+		\item {\sc Playing with coordinate systems} Let
+			\[
+				\vec u=\mat{1\\0\\0}\qquad\vec v=\mat{0\\1\\1}\qquad \mathcal B=\{\vec u,\vec v\}\qquad \mathcal P=\Span\,\mathcal B.
+			\]
+			\begin{enumerate}
+				\item 
+				For any point $\vec x\in\mathcal P$, $\vec x=\alpha\vec u+\beta\vec v$ for some $\alpha,\beta$.
+				So, we might say $[\vec x]_{\mathcal B} =\mat{\alpha\\\beta}$.  Let $\|\cdot\|_{\mathcal B}:\R^2\to\R$
+				be the \emph{induced norm} on $\R^2$ defined by,
+				\[
+					\|[\vec x]_{\mathcal B}\|_{\mathcal B} = \|\vec x\|.
+				\]
+				(Remember, $[\vec x]_{\mathcal B}$ is a list of two numbers---it isn't the same thing as the vector $\vec x$).
+				Write down a formula for $\left\|\mat{\alpha\\\beta}\right\|_{\mathcal B}$.
+
+				\item Just like an induced norm, we can also have an induced dot-product.  Let the
+					inclusion map $\iota:\R^2\to\mathcal P$
+					be defined as
+					\[
+						\iota\mat{\alpha\\\beta} = \alpha \vec u+\beta\vec v.
+					\]
+					Define the $\mathcal B$-dot-product, $\odot$, as 
+					\[
+						\vec a\odot \vec b = (\iota \vec a)\cdot (\iota \vec b)
+					\]
+					for any $\vec a,\vec b\in\R^2$.  Verify that $\|\vec a\|_{\mathcal B} = \sqrt{\vec a\odot\vec a}$
+					for $\vec a\in\R^2$ and draw the set of all unit vectors in $\R^2$ under the norm $\|\cdot\|_{\mathcal B}$.
+				\item For $\vec a,\vec b\in\R^2$, we will \emph{define} the angle between $\vec a$ and $\vec b$
+					to be the number $\theta$ so that $\vec a\odot\vec b=\|\vec a\|_{\mathcal B}\|\vec b\|_{\mathcal B}\cos\theta$.
+					Let $\vec c_1=\mat{1\\0}$, $\vec c_2=\mat{2\\1}$, $\vec c_3=\mat{1\\1}$.  For each $\vec c_i$, draw
+					the set of all vectors orthogonal to $\vec c_i$ with respect to $\odot$.  Is the notion of
+					angle coming from $\odot$ the same as from the standard dot product?  Is it always different?
+
+
+				\item  An \emph{inner product} on a vector space $V$ is a function $\langle \cdot,\cdot\rangle:V\times V\to\R$
+					that is symmetric, bilinear, and positive definite.  That is, for any $\vec u,\vec v,\vec w\in V$
+					and $\alpha\in\R$,
+					\begin{enumerate}
+						\item $\langle \vec u,\vec v\rangle =\langle \vec v,\vec u\rangle$ (symmetric)
+						\item $\langle \alpha\vec u,\vec v\rangle =\alpha\langle \vec u,\vec v\rangle =\langle \vec u,\alpha\vec v\rangle$\\
+							and $\langle \vec u+\vec w,\vec v\rangle =\langle \vec u,\vec v\rangle+\langle \vec w,\vec v\rangle$\\
+							and $\langle \vec u,\vec v+\vec w\rangle =\langle \vec u,\vec v\rangle+\langle \vec u,\vec w\rangle$ (bilinear)
+						\item $\langle \vec u,\vec u\rangle\geq 0$ and $\langle \vec u,\vec u\rangle=0$ if and only if $\vec u=0$ (positive definite).
+					\end{enumerate}
+
+					Show that both the standard dot product and $\odot$ are inner products on $\R^2$.
+				\item Notice that for $\vec x,\vec y\in\R^2$, $\vec x\cdot\vec y = \vec x^T\vec y=\vec x^TI\vec y$.
+					Find a matrix $A$ such that $\vec x\odot \vec y=\vec x^TA\vec y$.  Matrices like $A$ 
+					show up in the study of relativity.  When you are moving at relativistic speeds, the angle
+					you perceive between two objects is different than someone at rest would perceive.  Using
+					a matrix like $A$ or an inner product like $\odot$ allows you compensate for how relativistic
+					effects change your perceptions.
+			\end{enumerate}
+
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,233 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=-.4in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2}}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Det}{\mathrm{det}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\renewcommand{\d}{\mathrm{d}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+\setheader{Math 281-3}{Homework 8}{Due Thursday, May 26}{}{}{}
+
+	\begin{enumerate}
+		\item Let $A=\mat{7.5&-7&0\\3.5&-3&0\\7&-7&0.5}$.
+		\begin{enumerate}
+			\item Find all eigenvalues of $A$ and their multiplicity.
+			\item Find a basis for each eigenspace of $A$.
+			\item Is $A$ diagonalizable?  If so, diagonalize $A$.  If not, explain why
+				not.
+			\item Compute $\lim_{n\to\infty} A^n$ or explain why it doesn't exist.  
+			\item $X$ is a matrix with eigenvalues $2,3,3$.  Does $\lim_{n\to\infty} X^n$ exist?
+				Does it depend on whether $X$ is diagonalizable?
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Prove that for a matrix $B$ if $\mathrm{char}(B)$ has distinct roots (that is,
+				each root has multiplicity 1), then
+			$B$ is diagonlaizable.
+			\item Prove that if $C$ is an invertible matrix, then $(C^T)^{-1}= (C^{-1})^T$.
+			\item Prove that if $B$ is diagonalizable, then $\Det(B) = \Det(B^T)$.  This is true 
+				for all square matrices, but you only need to prove it for diagonalizable ones.
+		\end{enumerate}
+		
+		\item 
+
+		McDonalds recently negotiated a large purchasing deal for fish, chicken, and beef.  They have agreed to purchase
+		40 million tons of fish, 40 million tons of chicken, and 100 million tons of beef.  As such, they want to create an advertising campaign
+		to ensure that consumers eat the correct portion of each meat product.
+
+		After paying to have a commercial produced, McDonalds collects the following data: After watching the commercial once,
+		a person who initially wanted fish now has a 10\% chance of buying a fish product, a 60\% chance of buying a beef product,
+		and a 30\% chance of buying a chicken product; after watching, a person who initially wanted to buy a beef product has
+		a 20\% chance of buying a fish product, a 60\% chance of buying a beef product, and a 20\% chance of buying a chicken product;
+		after watching, a person who initially wanted to by a chicken product has a 40\% chance of buying a fish product, a 50\%
+		chance of buying a beef product, and a 10\% chance of buying a chicken product.
+		\begin{enumerate}
+			\item If the vector $\vec e_1$ represents a person who wants 
+			to buy a fish product, $\vec e_2$ represents a person who wants 
+			to buy a beef product, and $\vec e_3$ represents a person who wants 
+			to buy a chicken product, find a matrix $M$ such that $M\vec e_i$ gives the probability of buying fish, beef,
+			or chicken after watching the commercial once.
+
+			\item Compute the eigenvalues and eigenvectors of $M$.
+
+			\item Assume that a fish product takes 50 grams
+			of fish, a beef product takes 50 grams of beef,
+			and a chicken product takes 50 grams of chicken.
+			Further, assume that each time a person watches
+			the commercial it has the same impact (i.e.,
+			watching the commercial twice means the likelihood
+			of buying a particular product is given by $M^2$).
+			If McDonalds ensures that the average customer
+			sees the commercial 3000 times, what are the
+			relative proportions of fish, beef, and chicken
+			McDonalds expects to sell?
+
+			\item Should McDonalds run the ad? Does the
+			initial population's preferences for fish,
+			beef, or chicken matter? \emph{Explain your
+			reasoning.}
+		\end{enumerate}
+
+		\item
+			We are often interested in bounding error.  As we are all familiar
+			with, if we make a measurement and find it to be $7\pm 0.1$, if
+			we amplify our result by a factor of two, the error will double and
+			we should report $14\pm 0.2$,
+
+			This one-dimensional example is straightforward.
+			However, things are more complicated when we deal with multiple dimensions.
+			In higher dimensions, your error takes the form of an error vector, and your 
+			transformation may be a matrix.
+
+			Let $\vec m_a$ be the actual value of a quantity.  We say that $\vec m$ is
+			a measurement of $\vec m_a$ within tolerance $\epsilon$ if 
+			$\|\vec m_a-\vec m\|\leq \epsilon$.  Another way of saying that is
+			\[
+				\vec m_a = \vec m + \vec v\qquad\text{where } \|\vec v\|<\epsilon.
+			\]
+			Here, $\vec v$ is our \emph{error vector}.
+			If we apply linear
+			transformation $T$, we have that $T\vec m_a = T\vec m + T\vec v$ and so
+			our error goes from $\vec v$ to $T\vec v$.  The question becomes, can we find a number
+			$k$ so that if $\|\vec v\|<\epsilon$, then $\|T\vec v\|<k\epsilon$.  The smallest
+			such number
+			is called the \emph{norm} of the matrix $T$, and we write $\|T\|=k$.
+
+			\begin{enumerate}
+				\item Explain why $\|T\|=\max \{\|T\vec u\|:\vec u\text{ is a unit vector}\}$.
+				\item Let $A=\mat{1&2\\3&1}$.  Use Matlab/octave to 
+					create a $2\times 360$ matrix $C$ whose column vectors
+					are uniformly distributed points on the unit circle (Hint:
+					a command like {\tt [cos(1:10)]} will produce the vector $\mat{\cos 1&\cos 2&\cdots &\cos 10}$).
+					
+					Graph $C$ and $AC$ on the same plot.  Notice that $C$ 
+					should be a circle (you may need to rescale your axes with {\tt xlim([-4 4]); ylim([-4 4])}
+					to get $C$ to look like a circle) and $AC$ should be an ellipse.  
+					Explain how the major and minor axes of the ellipse $AC$ relate to $\|A\|$.
+
+				\item Numerically estimate $\|A\|$. 
+					If $\vec v$ is an error vector with $\|\vec v\|=0.01$, give an
+					upper bound on $\|A^{30}\vec v\|$.
+				\item Suppose $B$ is a diagonalizable $2\times 2$ matrix with eigenvalues
+					$\lambda_1$ and $\lambda_2$ satisfying $|\lambda_1|,|\lambda_2|\leq 1$.
+					Come up with a conjecture for what an upper bound for $\|B\|$ might be.
+					Then, numerically experiment.  Try to explain your findings.  (Hint:
+					if you want a ``random'' matrix with particular eigenvalues,
+					you might consider something like {\tt r=rand(2); B=r*D*r\^(-1)}
+					for a well-chosen {\tt D}).  Make sure to be good scientists and
+					seek for evidence to \emph{disprove} your hypothesis. 
+			\end{enumerate}
+		\item {\sc Let's blow the lid off}.  It's time to tiptoe into the realm of infinite
+			dimensions.  Using the idea of \emph{sampling}, we can easily turn a function
+					into a finite dimensional vector.  Let $f:[0,1]\to\R$ be a continuous
+					function, and let $s_n:\{\text{continuous functions}\}\to\R^n$
+					be the function that creates a vector out of a function by sampling
+					that function at $n$ equally spaced points.  That is,
+					\[
+						s_n(f) = \mat{f(0)\\f(\frac{1}{n})\\f(\frac{2}{n})\\\vdots\\f(\frac{n-1}{n})}.
+					\]
+			\begin{enumerate}
+				\item Using $s_n$, we can now carry over many of our familiar operations from $\R^n$ to 
+					the space of functions.  Let $\mathcal P_n$ be the set of polynomials of degree at most $n$.
+					We can define attempt to induce an \emph{inner product} on $\mathcal P_n$ as follows,
+					\[
+						\langle\cdot,\cdot\rangle_n:\{\text{continuous functions}\}\to \R\qquad\text{ defined by }\qquad
+						\langle p,q\rangle_n = s_n(p)\cdot s_n(q).
+					\]
+					Show that $\langle \cdot,\cdot\rangle_n$ induces an inner product on $\mathcal P_{n-1}$ but
+					not on $\mathcal P_n$ (Hint: a degree $n$ polynomial is uniquely determined by $n+1$ points).
+				\item Recall that with an inner product $\langle\cdot,\cdot\rangle_n$, we define an induced norm
+					via $\|f\|_{\langle\cdot,\cdot\rangle_n}=\sqrt{\langle f,\cdot f\rangle_n}$.  Our goal
+					is to find an induced norm that works for all polynomials simultaneously.  One idea might
+					be to try to take the limit of $\langle\cdot,\cdot\rangle_n$, however, this runs into problems,
+					because $\lim_{n\to\infty} \langle 1,1\rangle_n=\infty$.  Let's fix this by \emph{normalizing}.
+
+					Define
+					\[
+						\langle a,b\rangle_{\lim} = \lim_{n\to\infty} \frac{1}{n}\langle a,b\rangle_n
+					\]
+					and let $\|\cdot\|_{\lim}$ be the induced norm.  Compute $\|f\|_{\lim}$ 
+					for $f(x)=1$, $f(x)=x$, and $f(x)=x^2$.  (Hint: you already know how to do this!  Think
+					about Riemann sums!)
+				\item It turns out $\langle \cdot,\cdot\rangle_{\lim}$ is an inner product on all continuous
+					functions on $[0,1]$.  Thus, we can use it to do projections and find angles just
+					like we would in $\R^n$.  
+
+					Let $\mathcal B=\{1,x,x^2,x^3\}$ be a basis for $\mathcal P_3$.  Apply the Gram-Schmidt process
+					to $\mathcal B$ (read your textbook or Wikipedia if we haven't done it in class yet) to
+					find an orthonormal basis for $\mathcal P_3$.
+				\item Use your basis from the previous part to find $\proj_{\mathcal P_3} \tfrac{1}{1+10x^2}$.  Plot
+					$\tfrac{1}{1+10x^2}$ and your projection on the same axes.  Is it a good approximation?  How
+					does it compare with the degree-3 Taylor approximation? (You may use a computer
+					to estimate the coefficients).
+
+				\item {\sc The Fourier Basis}.  The Fourier basis is one of the most important bases for
+					the space of functions.  Let $\mathcal B_n=\{1,\sin 2\pi t,\cos 2\pi t,\sin 4\pi t,\cos 4\pi t,\sin 6\pi t,\cos 6\pi t,
+					\ldots, \sin 2n\pi t,\cos 2n\pi t\}$.  Apply the Gram-Schmidt process to $\mathcal B_n$
+					to obtain the orthonormal Fourier basis $\mathcal F_n$.
+				\item Let $D$ be differentiation.  Is the Fourier basis an eigenbasis for $D$?  How
+					about for the second derivative $D^2$? Write out 
+					$[D]_{\mathcal F_7}$ and $[D^2]_{\mathcal F_7}$.
+				\item Using complex numbers, the Fourier basis can be written in terms of exponentials
+					as $\mathcal F_n=\{ e^{2k\pi i t}: 0\leq k\leq n\}$.  Show that each element in
+					the complex Fourier basis is an eigenvector of differentiation and give its
+					corresponding eigenvalue.  Then marvel at how projecting a function onto the complex
+					Fourier basis looks a lot like taking the Laplace transform (it isn't the same, it's
+					of course called the \emph{Fourier} transform, but it's darn close).
+
+
+			\end{enumerate}
+
+
+		
+
+	\end{enumerate}
+\end{document}

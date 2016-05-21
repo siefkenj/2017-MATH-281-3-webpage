@@ -161,7 +161,7 @@
 					Come up with a conjecture for what an upper bound for $\|B\|$ might be.
 					Then, numerically experiment.  Try to explain your findings.  (Hint:
 					if you want a ``random'' matrix with particular eigenvalues,
-					you might consider something like {\tt r=rand(2); B=r*D*r\^(-1)}
+					you might consider something like {\tt r=rand(2); B=r*D*r\textasciicircum(-1)}
 					for a well-chosen {\tt D}).  Make sure to be good scientists and
 					seek for evidence to \emph{disprove} your hypothesis. 
 			\end{enumerate}
@@ -177,7 +177,7 @@
 			\begin{enumerate}
 				\item Using $s_n$, we can now carry over many of our familiar operations from $\R^n$ to 
 					the space of functions.  Let $\mathcal P_n$ be the set of polynomials of degree at most $n$.
-					We can define attempt to induce an \emph{inner product} on $\mathcal P_n$ as follows,
+					We can attempt to induce an \emph{inner product} on $\mathcal P_n$ as follows,
 					\[
 						\langle\cdot,\cdot\rangle_n:\{\text{continuous functions}\}\to \R\qquad\text{ defined by }\qquad
 						\langle p,q\rangle_n = s_n(p)\cdot s_n(q).
@@ -222,10 +222,65 @@
 					corresponding eigenvalue.  Then marvel at how projecting a function onto the complex
 					Fourier basis looks a lot like taking the Laplace transform (it isn't the same, it's
 					of course called the \emph{Fourier} transform, but it's darn close).
-
-
 			\end{enumerate}
 
+		\item {\sc An Ultra-violet Catastrophe}.  We can use the Fourier basis to quantify the Heisenberg uncertainty
+			principle!  And, because I'm sure you're feeling computational, we'll do so numerically with Matlab/octave.
+			\begin{enumerate}
+				\item Create a $129\times 129$ matrix $F$ whose columns are the basis elements in $\mathcal F_{64}$
+					evaluated at the points $\mathbf x=(0/129,1/129,2/129,\ldots,128/129)$.  If you plot the first three columns of
+					$F$ with the command {\tt plot(F(:,1:3))} you should see the graphs of $y=1$, $y=\sqrt{2}\sin 2\pi t$
+					and $y=\sqrt{2}\cos 2\pi t$.  If you'd like to see $F$ in all its glory, you can use
+					the command {\tt imshow(F)}.
+
+					Compute $F^TF$ and explain your result.
+				\item Since $F$ changes basis from the Fourier basis to the standard basis, $F^{-1}=F^T$ goes
+					from the standard basis to the Fourier basis.  (In your computations, use {\tt F'} instead of
+					{\tt F\textasciicircum(-1)} for numerical stability reasons.)  Create four column vectors
+					\[
+					\vec v_0=3\sin(4\pi \mathbf x)\qquad \vec v_{0.2}=3\sin(4\pi (\mathbf x-0.2))\]\[
+						\vec v_{0.5}=3\sin(4\pi (\mathbf x-0.5))\qquad\vec v_{0.5}=3\sin(4\pi (\mathbf x-0.7))
+					\]
+					where $\mathbf x$ ranges over the values specified in part 1.  Use $F^{-1}$ to write
+					these vectors in the Fourier basis.  What frequencies in the Fourier basis have non-zero coefficients?
+					Does this make sense?
+				\item Recall that $a\sin t+b\cos t$ is a shifted sine wave with amplitude $\sqrt{a^2+b^2}$.  Using just the 
+					coefficients from the Fourier basis found in part 2, verify that $\vec v_i$ is a shifted sine wave
+					with amplitude 3 for each $i\in\{0,.2,.5,.7\}$.
+				\item According to Einstein, the energy contained in a wave of frequency $k$ is proportional to $ka$
+					where $a$ is the amplitude of the wave.
+					Since we're doing math, we will assume the energy of a wave of frequency $k$ and amplitude $a$
+					is \emph{equal} to $ka$.  Suppose a particle is described in the Fourier basis by
+					\[
+						[\vec p]_{\mathcal F_{64}}=\mat{1&1&1.5&2&0&0&\cdots & 0}.
+					\]
+					Compute the energy of $\vec p$.
+				\item We are now ready to see the Heisenberg uncertainty principle in action.  Using
+					the command {\tt s=4; xs=(0:128)/129; s*normpdf(s*(xs-0.5))} we can create
+					a bell curve centered at $0.5$ with standard deviation $1/s$.  As {\tt s}
+					increases, the bell curve will become more and more concentrated.  Using your
+					knowledge of the Fourier basis, compute
+					the wave-energy contained in bell curves with standard deviations $1/4,1/40, 1/400, 1/4000$.
+					If a particle has a finite amount of energy, is there a limit to how concentrated in
+					one spot it can be?
+				\item The command {\tt a=.3; b=.4; xs=(0:128)/129; 1/(b-a)*(xs > a).*(xs < b) } will
+					create the distribution of a particle that is contained in the range $[a,b]$ with
+					100\% certainty.  Compute the energy of such a particle.  Does changing the width of 
+					the interval affect the amount of energy in the particle?  How does the energy
+					contained in this particle compare to that in a bell-curve-distributed particle?
+				\item Let $\vec p$ be a particle strictly contained in $[a,b]$.  We can
+					attempt to see what it would look like if this particle existed in nature
+					by forcing its energy to be low.  That is, if we compute $F^{-1}\vec p$, we can
+					then use the use a truncation function to set the coefficients of all high-frequency
+					sine and cosine waves to zero.  Let $t:\{\text{ vectors in the basis }\mathcal F_{64}\}\to
+					\{\text{ vectors in the basis }\mathcal F_{64}\}$ defined so that $t(\vec v)$
+					sets the coefficients of every sine and cosine wave with frequency higher than 25 to zero
+					and leaves the rest of the coefficients alone.
+
+					Now, we might say that $F(t(F^{-1}\vec p))$ is what $\vec p$ would ``look like''
+					if we forced it to have finite energy.  For $[a,b]=[.3,.4]$ and $[a,b]=[.4,.6]$
+					graph a picture of what $\vec p$ would ``look like.''
+			\end{enumerate}
 
 		
 

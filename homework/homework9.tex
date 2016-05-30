@@ -1,0 +1,101 @@
+\documentclass[letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{tikz}
+
+%%%
+% Set up the margins to use a fairly large area of the page
+%%%
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=6in
+\topmargin=0in
+\textheight=9.0in
+\parskip=.07in
+\parindent=0in
+\pagestyle{fancy}
+
+\expandafter\def\expandafter\quote\expandafter{\quote\sf\color{DarkGreen}}
+
+%%%
+% Set up the header
+%%%
+\newcommand{\setheader}[6]{
+	\lhead{{\sc #1}\\{\sc #2} %({\small \it \today})
+	}
+	\rhead{
+		{\bf #3} 
+		\ifthenelse{\equal{#4}{}}{}{(#4)}\\
+		{\bf #5} 
+		\ifthenelse{\equal{#6}{}}{}{(#6)}%
+	}
+}
+
+%%%
+% Set up some shortcut commands
+%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Proj}{\mathrm{proj}}
+\newcommand{\Perp}{\mathrm{perp}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Rank}{\mathrm{rank}}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+%%%
+% This is where the body of the document goes
+%%%
+\begin{document}
+	\setheader{Math 281-3}{Homework 9}{Due Monday, June 6}{}{}{}
+
+		
+			We've come a long way in this course---we've gone from row-reduction to matrix equations, from
+			spans and linear independence to eigenvectors and diagonalization.  I would like you to
+			write reflect about your experience.
+
+			Look back on the three over-arching {\sc Learning Outcomes} listed on the course syllabus.
+			Imagine you are writing a letter to a parent/aunt/uncle who has 
+			taken technical math/science courses in
+			the past, but has forgotten most of the terminology.  Write to this audience explaining
+			to what level you feel you've achieved (or not achieved) each outcome.  Your essay
+			may talk about Math 281-3 exclusively, or you may talk about the entire Math 281 sequence.
+			As you write, try to give specific examples/anecdotes to back up your claims (for example, 
+			``I didn't see the utility in having multiple definitions for a single object until
+			I had to visualize linear independence and then prove something about it.  Visualizing, it was
+			much easier to think in terms of the \emph{no vector can be removed} definition, but
+			when proving things, the \emph{no non-trivial linear combination gives the zero vector}
+			definition was easier to handle\mbox{.}'' is much better than ``I didn't see the utility in 
+			having multiple definitions for a single object until the homework.'')
+
+
+			Your essay should be 1--2 pages in length.  To help you set the mood, 
+			consider writing your essay as a letter, perhaps starting with,
+			\begin{quote}
+				Dear Mom, 
+
+				This year at Northwestern, I've been taking Math 281, which is a course about$\ldots$
+			\end{quote}
+
+			Of course, if you're inspired to start your essay a different way, feel free to!
+
+			Some guidelines on how your essay will be judged:
+			\begin{enumerate}
+				\item[Acceptable:]
+					Correctly identified the learning outcomes from the syllabus 
+					and conveyed to the reader whether or not you have achieved them.
+				\item[Good:]
+					Correctly identified the learning outcomes from the syllabus
+					and explained clearly \emph{why} you have or have not achieved them.
+				\item[Excellent:]
+					Correctly identified the learning outcome from the syllabus, 
+					discussed \emph{how} these learning outcomes connect to specific material or themes from the course, 
+					and explained clearly \emph{why} you have or have not achieved them.
+			\end{enumerate}
+
+\end{document}

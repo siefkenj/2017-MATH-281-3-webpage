@@ -234,12 +234,12 @@
 					the command {\tt imshow(F)}.
 
 					Compute $F^TF$ and explain your result.
-				\item Since $F$ changes basis from the Fourier basis to the standard basis, $F^{-1}=F^T$ goes
+				\item Since $F$ changes basis from the Fourier basis to the standard basis, $F^{-1}$ is almost $F^T$ and goes
 					from the standard basis to the Fourier basis.  (In your computations, use {\tt F'} instead of
 					{\tt F\textasciicircum(-1)} for numerical stability reasons.)  Create four column vectors
 					\[
 					\vec v_0=3\sin(4\pi \mathbf x)\qquad \vec v_{0.2}=3\sin(4\pi (\mathbf x-0.2))\]\[
-						\vec v_{0.5}=3\sin(4\pi (\mathbf x-0.5))\qquad\vec v_{0.5}=3\sin(4\pi (\mathbf x-0.7))
+						\vec v_{0.5}=3\sin(4\pi (\mathbf x-0.5))\qquad\vec v_{0.7}=3\sin(4\pi (\mathbf x-0.7))
 					\]
 					where $\mathbf x$ ranges over the values specified in part 1.  Use $F^{-1}$ to write
 					these vectors in the Fourier basis.  What frequencies in the Fourier basis have non-zero coefficients?

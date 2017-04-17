@@ -6,6 +6,7 @@
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
 
 %%%
 % Set up the margins to use a fairly large area of the page
@@ -52,207 +53,110 @@
 % This is where the body of the document goes
 %%%
 \begin{document}
-	\setheader{Math 281-3}{Homework 4}{Due Thursday, April 28}{}{}{}
-
-
-	For this homework, you will be using \emph{Matlab} (or the free and open-source version of
-	\emph{Matlab} called \emph{Octave}).  Include a clearly-labeled printout
-	of the work you did in Matlab for each problem.
-	
-	Before you start, read through \\
-	\centerline{\url{http://web.gps.caltech.edu/classes/ge11d/doc/matlab_Resource_Seminar.pdf}}\\
-	for a short Matlab introduction.
-	For additional documentation, see the Matlab website \\\centerline{\url{http://www.mathworks.com/help/matlab/index.html}}
-
-	\textbf{Quick Tips:}
-
-	\vspace{-1em}
-	\begin{itemize}
-		\item You can supress Matlab output by adding a `\texttt{;}'
-		to the end of your Matlab command (this is useful for
-		Matlab commands executed in loops).
-
-		\item You can save plots/figures from the figure's dialog
-		by selecting `Save as' and then choosing \texttt{png}
-		or \texttt{jpg} in the file-types dropdown.
-
-		\item You can include Matlab code in \LaTeX\ by copying
-		and pasting it between \texttt{\textbackslash
-		begin\{verbatim\}} \ldots\texttt{\textbackslash
-		end\{verbatim\}}.
-	\end{itemize}
-
+	\setheader{Math 281-3}{Homework 4}{Due Thursday, April 27}{}{}{}
 	\begin{enumerate}
-		\item Find the general solution to the system of equations corresponding to each augmented matrix.
+		\item For each of the following statements, produce a counterexample to show that the statement is {\bf false}.
 			\begin{enumerate}
-				\item \[\left[\begin{array}{ccccc|c}
-				       1&    11&   -22&     0&     3&1 \\
-				    5244&  1542& -3084&   576& 16308&2\\
-				     108&  1188& -2376&     0&   324&3\\
-				     264&   465&  -930&    25&   817&4\\
-				    2166&  3729& -7458&   206&  6704&5
-					\end{array}\right]\]
-				\item \[\left[\begin{array}{ccccc|c}
-						    7&  3&  2&  3&  7&  1 \\
-						    9&  3&  2&  1& 10&  2\\
-						    7&  5&  2&  2&  8&  3\\
-						    4& 10&  3&  1& 10&  4\\
-						    4&  6&  1&  3&  9&  5
-				    \end{array}\right]
-					\]
+				\item If $A$ and $B$ are square matrices, $AB=BA$.
+				\item If $AB=\mat{1&1\\1&1}$, then $A$ and $B$ are $2\times 2$ matrices.
+				\item If $AB=I$ then $BA=I$.
+				\item If $A^2=0$, then $A=0$.
 			\end{enumerate}
-		
-		\item Although the \texttt{rref} command will row-reduce for you, Matlab makes it easy
-			to row reduce ``by hand.''  If \texttt{A} is a matrix, the row operation 
-			$R_2\mapsto R_2-6R_1$ can be performed with the command \texttt{A(2,:)=A(2,:)-6*A(1,:)}
-			and other row operations can be performed similarly.
-
+		\item Let $R=\mat{1&2&3\\4&5&6\\7&8&9}$.
 			\begin{enumerate}
-				\item Consider the $3\times 3$ matrix $A=\mat{1&4&0\\1&5&0\\0&0&0}$ and $B=\mat{1&0&0\\0&1&0\\0&0&1}$.
-					You only need to perform two row operations to fully reduce $A$.  Call these two
-					operations $R^{(1)}$ and $R^{(2)}$. Use Matlab to perform those
-					row operations on $A$ and also perform the same row operations on $B$ (effectively, un-row
-					reducing $B$).
-				\item Let $B_1=R^{(1)}(B)$ and $B_2=R^{(2)}(B)$ be the matrices obtained from $B$ by applying
-					the two row operations in isolation (in Matlab, you can name variables
-					\texttt{B1} and \texttt{B2} if you like).  What happens when you perform the matrix product
-					$B_1A$?  How about $B_2A$?  And $B_2B_1A$?  Finally compute the product $BA$, and explain
-					why you get the results you do.
-				\item Let $X=\mat{2&1&3\\2&1&3\\3&2&4}$.  Find a matrix $Y$ so that $YX=\mathrm{rref}(X)$.
+				\item Find all solutions to the matrix equation $R\mat{x_1\\x_2\\x_3}=\mat{2\\5\\8}$.
+				\item Prove that the set $X=\{\vec x\in\R^3:R\vec x=\vec 0\}$ is a subspace.
+				\item Prove that the set $Y=\{\vec y\in\R^3:\vec y=R\vec x\text{ for some }\vec x\in\R^3\}$ is a subspace.
 			\end{enumerate}
-		\item A loop in Matlab/Octave is written with the 
-	\begin{verbatim}
-for i=1:n,
-    [loop content]
-end
-	\end{verbatim}
-	syntax.
+		\item This problem explores two interpretations of matrix multiplication: \emph{linear combinations of
+			columns} and \emph{dot products with rows}.  If you need ideas, please review these two
+			interpretations.
+			
+			Suppose $E$ is a $4\times 3$ matrix with columns $\vec c_1,\vec c_2,\vec c_3$ and rows
+			$\vec r_1,\vec r_2,\vec r_3,\vec r_4$.  Let $\vec v=\mat{2\\-1\\1}$.
+			\begin{enumerate}
+				\item Express $E\vec v$ as a linear combination of $\vec c_1,\vec c_2,\vec c_3$.
+				\item Supposing $\vec r_1\cdot \vec v=1$, $\vec r_2\cdot \vec v=6$, $(\vec r_3+\vec r_4)\cdot \vec v=2$,
+					and $(\vec r_3-\vec r_4)\cdot \vec v=-2$, compute $E\vec v$.
+			\end{enumerate}
 
-	For example, if we want the variable $x$ to be an accumulated sum of squares from $1^2$ to $15^2$ 
-	(that is $x=1^2+2^2+\cdots+15^2$), we could write
-	\begin{verbatim}
-x=0;
-for i=1:15,
-    x = x + i^2;
-end
-	\end{verbatim}
-	After executing this code $x$ will be the value $1240$.  The code works as follows: first we assign the value
-	$0$ to $x$.  Then we enter the loop.  In the first iteration, when $i$ is 1, the new value of $x$ will be the current value,
-	0, plus $1^2$.  The next time through the loop, $i$ is 2 and so we assign $x$ to be the current value, $1^2$, plus
-	$2^2$, etc.. Once we have looped through with the value of $i$ being 15, we stop.
-
-	If statements are written with the 
-	\begin{verbatim}
-if [var]==[val],
-    [if content]
-end
-	\end{verbatim}
-	syntax (note the double equals). 
-
-	For example, if we wanted $x$ to be the sum of the squares of only the even numbers between 1 and 15, we might write:
-	\begin{verbatim}
-x=0;
-for i=1:15,
-    if round(i/2) == i/2,
-        x = x + i^2;
-    end
-end
-	\end{verbatim}
-
-	Here, {\tt round(i/2)==i/2} is true when {\tt i/2} has no decimal places and so it is even.  Thus, when that happens
-	(and only when that happens) we add the value $i^2$ to $x$.
-
-
-	{\bf Question}:
-	\begin{enumerate}
-		\item The command \texttt{rand(3,1)} will generate a random $3\times 1$ column vector.  Find out what percentage
-		of random triples of vectors $\{\vec a,\vec b,\vec c\}$ are linearly independent.  Sample at least 1000
-		random triples to gather a statistic.
-
-		Consider your result and come up with an explanation of why you got the percentage you did.
-
-		{\bf Tips}: Build a loop to test this 1000 times, but start out
-		with a much smaller loop;
-		use `\texttt{;}' inside your loop so you don't get a bunch of unhelpful information printed to the screen;
-		and use Matlab's built-in commands to help you like \texttt{rref} to row reduce, \texttt{rank} to find the
-		rank, or \texttt{rand(3,3)} to make a $3\times 3$ matrix of random numbers.
-
-		\item The command \texttt{round(rand(3,1))} will generate a random $3\times 1$ column vector of just zeros
-			and ones.  Find out what percentage
-			of random triples  $\{\vec a,\vec b,\vec c\}$ of zero-one vectors are linearly independent.  Sample at least 1000
-			random triples to gather a statistic.
-
-		Explain your result.  Why is it different or the same as the previous part?  (Hint: it may be useful
-		to think of random zero-one vectors as lying on the vertices of the unit cube.)
-
-	\end{enumerate}
-
-	\item {\sc The power of the right definition}.  Our definition of projection was
-		slightly complicated and hard to compute with, especially compared with the textbook's.
-		However, the benefit of our definition is that it works, almost unchanged, in many more contexts.
-		In this problem we will be projecting onto subspaces.
-
-		{\bf Definition}  If $\vec v$ is a vector and $U$ is a subspace, \emph{the projection of 
-		$\vec v$ onto $U$} is the vector $\vec w\in U$ such that $\vec v-\vec w$ is orthogonal to
-		every vector in $U$.
-
-		For the remainder of this problem, let 
-		\[
-			\vec a'=\mat{1\\1\\2}\qquad \vec b'=\mat{1\\1\\1}\qquad \vec c\,' = \mat{-1\\6\\1}
-		\]
-		and let $\vec a=\vec a'/\|\vec a'\|$, $\vec b=\vec b'/\|\vec b'\|$, and $\vec c=\vec c'/\|\vec c'\|$.
-
+		\item Suppose that $\vec u$, $\vec v$, and $\vec w$ are vectors in $\R^2$ that are related
+			by the following diagram of a parallelogram.
+		\begin{center}
+			\begin{tikzpicture}[scale=.5]
+				\draw[-] (-6, 0) -- node [below,
+				very near end] {} (6, 0);
+				\draw[-] (0, -2) -- node [right,
+				very near start] {} (0, 5);
+				\draw[->] (0, 0) -- node [below,
+				very near end] {$4\vec{u}$}
+				(3, -1);
+				\draw[->] (0, 0) -- node [left,
+				near end] {$2\vec{v}$} (2, 3);
+				\draw[->] (0, 0) -- node [left,
+				very near end] {$3\vec{w}$}
+				(-1, 4);
+				\draw[dotted] (3, -1) -- node
+				[right, very near end] {} (2, 3);
+				\draw[dotted] (-1,4) -- node
+				[below, very near end] {} (2, 3);
+			\end{tikzpicture}
+		\end{center}
+		Let $A=[\vec u|\vec v|\vec w]$ be the matrix with columns $\vec u$, $\vec v$, and $\vec w$.
 		\begin{enumerate}
-			\item Let's make life a little easier first.  Show that if $\mathcal B$ is a basis
-				for a subspace $U$, then $\vec w$ is orthogonal to every vector in $U$ if
-				and only if $\vec w$ is orthogonal to every vector in $\mathcal B$.
-			\item Let $U=\Span\{\vec a,\vec b\}$.  Analytically find the exact vector
-				$\vec d=\proj_U\vec c$. (Hint, $U=\Span\{\vec a,\vec b\}=\Span\{\vec a',\vec b'\}$,
-				so you can avoid some square roots!)
-			\item Imagine you're an engineer who forgot how to do math but still wanted to
-				find this projection.  ``Ah ha,'' you think, ``I could use Matlab to
-				search for this vector!''
-
-				In Matlab, `\texttt{'}' transposes a matrix.  So, if you want
-				to compute $\vec a\cdot \vec b$, and $\vec a$ and $\vec b$ are column
-				vectors, you could do \texttt{a'*b} in Matlab.
-
-				You decide to try an brute force the problem.  Using the command \texttt{r = randn(1)*a + randn(1)*b}
-				you can generate a random vector in $U$ (\texttt{randn(1)} produces a normally distributed
-				random number, so it is equally likely to be positive or negative, unlike \texttt{rand} which always
-				produces a number in $[0,1]$).  You decide, since computers are fast, you will generate
-				1000 random vectors in $U$ and see which one most closely fits what the projection should fit.
-
-				Since it is unlikely any of your random vectors will be \emph{exactly} the projection,
-				you will need a \emph{score} function.  That is, you will need a function $s:\R^3\to[0,\infty)$
-				such that $s(\vec v)=0$ if $\vec v=\vec d=\Proj_U\vec c$ and $s(\vec v) < s(\vec w)$ if
-				$\vec v$ is ``closer to'' the correct projection than $\vec w$.  Your score function
-				doesn't need to be complicated, but it shouldn't involve $\vec d$.  
-				(If it could involve $\vec d$, a wonderful
-				score function would be $s(\vec v) = \|\vec d-\vec v\|$.)
-
-				With score function in hand, your guess for $\Proj_U\vec c$ is the random vector with the lowest score.
-
-				Write Matlab code to execute this procedure.  If your estimate for $\Proj_U\vec c$ is $\vec p$,
-				call $e=\|\vec p-\vec d\|$ the \emph{error} in your estimate.  Repeat the process of picking
-				the best estimate from 1000 random vectors at least 100 times and report the \textbf{average}
-				error.
-			\item In the procedure outlined above, we could use any basis for $U$ to generate random 
-				vectors.  Find a unit vector $\vec B$ that is orthogonal to $\vec a$
-				such that $U=\Span\{\vec a,\vec B\}$ (Hint, think
-				geometrically and use projections).  Repeat the guessing procedure above using
-				\texttt{r = randn(1)*a + randn(1)*B} to generate your random vectors.  What is the average error
-				using this new basis?  Why is it smaller?  Explain.
-			\item (Optional) We can dramatically improve the our guessing from above by using an \emph{adaptive algorithm}.
-				That is, instead of using \texttt{r = randn(1)*a + randn(1)*b} to generate a new
-				random vector each time, we could use our previous best guess and see if we improve by perturbing
-				it in a random direction.  Thus, our random vectors might look like \\
-				\centerline{\texttt{r = bestGuessSoFar + (randn(1)*a + randn(1)*b)/10}}
-				where we divide by 10 so that we don't guess something too far from our previous good guess 
-				(a more advanced adaptive algorithm would use the score function and adjust the factor of 10
-				based on that).  How much improvement do you see with an adaptive algorithm?
+			\item What is the rank of $A$?
+			\item Find all solutions to the equation $A\vec x=\vec 0$.
+			\item Find a basis for the subspace $V=\{\vec x\in\R^3: A\vec x=\vec 0\}$.
 		\end{enumerate}
 
+
+
+		\item 
+		\begin{enumerate}
+		
+			\item For each of the following linear transformations, find a matrix corresponding to the transformation.
+		 \begin{enumerate}
+				\item $\mathcal{A}$: Rotate $90^\circ$ counterclockwise around the origin (in $\R^2$).
+				\item $\mathcal{B}$: Send every vector in $\R^2$ to the zero vector.
+				\item $\mathcal{C}$: Project (in $\R^3$) onto the $yz$-plane.
+				\item $\mathcal{D}$: Project (in $\R^3$) onto the $x$-axis.
+				\item $\mathcal{E}$: Reflect (in $\R^3$) across the $xy$-plane.
+				\item $\mathcal{F}$: Stretch by a factor of 2 in the $y$-direction (in $\R^2$).
+				\item $\mathcal{G}$: Stretch by a factor of 2 in the $y$-direction (in $\R^3$).
+				\item $\mathcal{H}$: Rotate $90^\circ$ counterclockwise (as viewed looking ``down'' from the positive $y$-axis towards the origin) around the $y$-axis (in $\R^3$).
+			\end{enumerate}
+		
+		
+		\item For each transformation in part (a), explain geometrically whether or not the transformation is invertible.
+			(Recall, a function $f$ is invertible if there exists another function $g$ so that $f\circ g$ \emph{and}
+				$g\circ f$ are both the identity function.)
+		
+		
+		\item Let
+			\[
+				X=\mat{0 & -1 \\ 2 & 0}
+				\qquad \qquad
+				Y=\mat{0 & 0 & 0\\ 0 & 1 & 0 \\ 0 & 0 & -1}
+			\]
+			\[
+				Z=\mat{0 & 0 & 1 \\ 0 & 2 & 0 \\ -1 & 0 & 0}
+				\qquad\qquad
+				W=\mat{0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0}
+			\]
+			For each matrix $M\in\{X,Y,Z,W\}$, define a transformation $T_M$ where $T_M(\vec v) = M\vec v$.
+
+			For each $M$, explain how to obtain $T_M$ as a combination of linear transformations from part (a).
+				(Hint: you may need to combine two, three, or more transformations from part (a).)
+		\end{enumerate}
+
+		\item Let $\{\vec v_1,\vec v_2,\vec v_3\}\subset \R^3$ be a linearly independent set.
+			\begin{enumerate}
+				\item Suppose a linear transformation $T:\R^3\to\R^3$ satisfies $T(\vec v_i) = \vec v_i$ for $i\in\{1,2,3\}$.
+					Prove that $T$ is the identity transformation.
+				\item Suppose a linear transformation $S:\R^3\to\R^3$ satisfies $S(\vec v_1)=\vec v_1$,
+					$S(\vec v_2)=\vec v_2$ and $S(\vec v_3)=5 v_3$.  Prove that $S$ is invertible.
+			\end{enumerate}
 	\end{enumerate}
+
 
 \end{document}

@@ -55,11 +55,12 @@
 \begin{document}
 	\setheader{Math 281-3}{Homework 4}{Due Thursday, April 27}{}{}{}
 	\begin{enumerate}
-		\item For each of the following statements, produce a counterexample to show that the statement is {\bf false}.
+		\item For each of the following statements, produce a counterexample to show that the statement is {\bf false} in
+			general.
 			\begin{enumerate}
 				\item If $A$ and $B$ are square matrices, $AB=BA$.
 				\item If $AB=\mat{1&1\\1&1}$, then $A$ and $B$ are $2\times 2$ matrices.
-				\item If $AB=I$ then $BA=I$.
+				\item If $AB=I$, then $BA=I$.
 				\item If $A^2=0$, then $A=0$.
 			\end{enumerate}
 		\item Let $R=\mat{1&2&3\\4&5&6\\7&8&9}$.
@@ -150,11 +151,31 @@
 		\end{enumerate}
 
 		\item Let $\{\vec v_1,\vec v_2,\vec v_3\}\subset \R^3$ be a linearly independent set.
-			\begin{enumerate}
-				\item Suppose a linear transformation $T:\R^3\to\R^3$ satisfies $T(\vec v_i) = \vec v_i$ for $i\in\{1,2,3\}$.
+			Suppose a linear transformation $T:\R^3\to\R^3$ satisfies $T(\vec v_i) = \vec v_i$ for $i\in\{1,2,3\}$.
 					Prove that $T$ is the identity transformation.
-				\item Suppose a linear transformation $S:\R^3\to\R^3$ satisfies $S(\vec v_1)=\vec v_1$,
-					$S(\vec v_2)=\vec v_2$ and $S(\vec v_3)=5 v_3$.  Prove that $S$ is invertible.
+
+		\item {\sc Linear transformations were here the whole time!} For each transformation, determine
+			whether or not it is a linear transformation.  If it is a linear transformation, give
+			its null space, i.e., all solutions to $\mathcal F\vec x=\vec 0$.
+			\begin{enumerate}
+				\item Let $V=\Span\{1,x,x^2\}$ where $1,x,x^2$ are (as usual) polynomials.
+					Let $D:V\to V$ be differentiation.  (Use the limit definition of 
+					the derivative. However, you can
+					do limits like you did in Calc I; you don't have to do $\varepsilon$--$\delta$
+					proofs).
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be left-translation by $s$.  That is, $D^sf(t)=f(t+s)$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be vertical-translation by $s$.  That is, $D^sf(t)=f(t)+s$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be horizontal-stretching by $s$.  That is, $D^sf(t)=f(t/s)$.
+				\item Let $\mathcal F=\{f:\R\to \R\}$ and let $D^s:\mathcal F\to \mathcal F$
+					be vertical-stretching by $s$.  That is, $D^sf(t)=sf(t)$.
+				\item Let $\mathcal I=\{f:\R\to \R\mid f\text{ is increasing}\}$ and let $D:\mathcal I\to \mathcal I$
+					be so that $D(f)=f^{-1}$ takes a function to its inverse.
+				\item Let $\mathcal L=\{f:\R\to \R\mid f(x)=mx+b\text{ for some }m,b\in\R\}$
+					be the set of all functions whose graphs are non-vertical lines and let $D:\mathcal L\to \R$
+					be evaluation at the point $x=1$.  That is, $D(f) = f(1)$.
 			\end{enumerate}
 	\end{enumerate}
 
